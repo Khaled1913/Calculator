@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Add inline styles for simplicity */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator {
+            width: 350px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-display {
+            background-color: #afe431;
+            padding: 20px;
+            text-align: right;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .calculator-display input {
+            width: 100%;
+            border: none;
+            background: transparent;
+            font-size: 1.5rem;
+            text-align: right;
+            padding: 5px;
+            box-sizing: border-box;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            padding: 20px;
+        }
+
+        .button {
+            height: 50px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
+            background-color: #cde3f2d1;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .button:hover {
+            background-color: #de9ec4;
+        }
+
+        .button.operator {
+            background-color: #0d3eba;
+            color: white;
+        }
+
+        .button.operator:hover {
+            background-color: #e68900;
+        }
+
+        .button.function {
+            background-color: #616161;
+            color: white;
+        }
+
+        .button.function:hover {
+            background-color: #4a4a4a;
+        }
+
+        .button.zero {
+            grid-column: span 2; /* Make zero button span two columns */
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="calculator-display">
+            <input type="text" id="display" value="0" disabled />
+        </div>
+        <div class="calculator-buttons">
+            <button onclick="clearDisplay()" class="button function">AC</button>
+            <button onclick="appendValue('(')" class="button function">(</button>
+            <button onclick="appendValue(')')" class="button function">)</button>
+            <button onclick="appendValue('/')" class="button operator">÷</button>
+            <button onclick="appendValue('7')" class="button number">7</button>
+            <button onclick="appendValue('8')" class="button number">8</button>
+            <button onclick="appendValue('9')" class="button number">9</button>
+            <button onclick="appendValue('*')" class="button operator">×</button>
+            <button onclick="appendValue('4')" class="button number">4</button>
+            <button onclick="appendValue('5')" class="button number">5</button>
+            <button onclick="appendValue('6')" class="button number">6</button>
+            <button onclick="appendValue('-')" class="button operator">−</button>
+            <button onclick="appendValue('1')" class="button number">1</button>
+            <button onclick="appendValue('2')" class="button number">2</button>
+            <button onclick="appendValue('3')" class="button number">3</button>
+            <button onclick="appendValue('+')" class="button operator">+</button>
+            <button onclick="appendValue('0')" class="button number zero">0</button>
+            <button onclick="appendValue('.')"class="button number dot">.</button>
+            <button onclick="calculateResult()" class="button operator">=</button>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('display');
+
+        function appendValue(value) {
+            if (display.value === "0") {
+                display.value = value; // Replace default 0
+            } else {
+                display.value += value;
+            }
+        }
+
+        function clearDisplay() {
+            display.value = '0'; // Reset to default 0
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
